@@ -1,0 +1,33 @@
+main_logo = By.className("login_logo")
+login_bot_img = By.className("bot_column")
+user_name_field = By.id("user-name")
+password_field = By.id("password")
+login_btn = By.id("login-button")
+login_credentials_form = By.id("login_credentials")
+login_password_form = By.className("login_password")
+login_name_1 = standard_user
+password = secret_sauce
+
+app_logo = By.className("app_logo")
+bucket = By.className("shopping_cart_container")
+
+menu_open_btn = By.xpath("//button[text()='Open Menu']")
+menu_div = By.className("bm-menu")
+menu_inventory = By.id("inventory_sidebar_link")
+menu_about = By.id("about_sidebar_link")
+menu_logout = By.id("logout_sidebar_link")
+menu_reset = By.id("reset_sidebar_link")
+menu_close_btn = By.xpath("//button[text()='Close Menu']")
+
+product_logo = By.className("header_secondary_container")
+product_label = By.className("product_label")
+
+product_select = By.className("product_sort_container")
+inventory_list = By.className("inventory_list")
+inventory_list_xpath = By.xpath("//*[@class='inventory_list']")
+
+social_twitter = By.className("social_twitter")
+social_facebook = By.className("social_facebook")
+social_linkedin = By.className("social_linkedin")
+
+
