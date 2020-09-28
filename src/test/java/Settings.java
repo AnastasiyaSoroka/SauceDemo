@@ -19,9 +19,9 @@ public class Settings {
         driver.get("https://www.saucedemo.com/index.html");
     }
 
-  //  @AfterMethod
-  //  public void tearDown() {
-//       driver.quit();
- //   }
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
 
 }
