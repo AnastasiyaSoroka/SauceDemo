@@ -8,8 +8,7 @@ public class LoginPage extends BasePage {
     public static final By USERNAME_INPUT = By.id("user-name");
     public static final By PASSWORD_INPUT = By.id("password");
     public static final By LOGIN_BUTTON = By.id("login-button");
-
-
+    public static final By ERROR = By.xpath("//*[contains(text(),'Epic')]");
     public static final String URL = "https://www.saucedemo.com/index.html";
 
     public LoginPage(WebDriver driver) {
@@ -27,5 +26,11 @@ public class LoginPage extends BasePage {
         driver.get(URL);
     }
 
-    //TODO create method to get error message
+    public String getErrorText() {
+        return driver.findElement(ERROR).getText();
+    }
+
+    public void clickLogin() {
+        driver.findElement(LOGIN_BUTTON).click();
+    }
 }
