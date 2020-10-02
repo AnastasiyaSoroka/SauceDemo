@@ -5,14 +5,15 @@ import org.openqa.selenium.WebDriver;
 
 public class CartPage extends BasePage {
 
-    public static final String URL = "https://www.saucedemo.com/cart.html";
-    String priceLocator = "//*[contains(text(),'%s')]/ancestor::*[@class='cart_item']" +
+    private String endpoint = "cart.html";
+
+    private String priceLocator = "//*[contains(text(),'%s')]/ancestor::*[@class='cart_item']" +
             "//div[@class='inventory_item_price']";
-    String quantityLocator = "//*[contains(text(),'%s')]/ancestor::*[@class='cart_item']" +
+    private String quantityLocator = "//*[contains(text(),'%s')]/ancestor::*[@class='cart_item']" +
             "//div[@class='cart_quantity']";
 
-    public static final By CHECKOUT_BUTTON = By.linkText("CHECKOUT");
-    public static final By CONTINUE_BUTTON = By.className("btn_secondary");
+    private final By CHECKOUT_BUTTON = By.linkText("CHECKOUT");
+    private final By CONTINUE_BUTTON = By.className("btn_secondary");
 
 
     public CartPage(WebDriver driver) {
@@ -20,7 +21,7 @@ public class CartPage extends BasePage {
     }
 
     public void openPage() {
-        driver.get(URL);
+        driver.get(URL+endpoint);
     }
 
     public String getPriceForProduct(String productName) {

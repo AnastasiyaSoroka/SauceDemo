@@ -5,11 +5,13 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
 
-    public static final By USERNAME_INPUT = By.id("user-name");
-    public static final By PASSWORD_INPUT = By.id("password");
-    public static final By LOGIN_BUTTON = By.id("login-button");
-    public static final By ERROR = By.xpath("//*[contains(text(),'Epic')]");
-    public static final String URL = "https://www.saucedemo.com/index.html";
+    private final By USERNAME_INPUT = By.id("user-name");
+    private final By PASSWORD_INPUT = By.id("password");
+    private final By LOGIN_BUTTON = By.id("login-button");
+    private final By ERROR = By.xpath("//*[contains(text(),'Epic')]");
+
+    private String endpoint = "index.html";
+
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -23,7 +25,7 @@ public class LoginPage extends BasePage {
     }
 
     public void openPage() {
-        driver.get(URL);
+        driver.get(URL+endpoint);
     }
 
     public String getErrorText() {

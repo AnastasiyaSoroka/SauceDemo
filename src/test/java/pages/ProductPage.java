@@ -5,8 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class ProductPage extends BasePage {
 
-    String addToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button\n";
-
+    private String addToCartLocator = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//button\n";
 
     public ProductPage(WebDriver driver) {
         super(driver);
