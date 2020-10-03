@@ -12,26 +12,25 @@ public class CartPage extends BasePage {
     private String quantityLocator = "//*[contains(text(),'%s')]/ancestor::*[@class='cart_item']" +
             "//div[@class='cart_quantity']";
 
-    private final By CHECKOUT_BUTTON = By.linkText("CHECKOUT");
+    private final By CHECKOUT_BUTTON = By.cssSelector(".checkout_button");
     private final By CONTINUE_BUTTON = By.className("btn_secondary");
-
 
     public CartPage(WebDriver driver) {
         super(driver);
     }
 
     public void openPage() {
-        driver.get(URL+endpoint);
+        driver.get(URL + endpoint);
     }
 
     public String getPriceForProduct(String productName) {
+
         return driver.findElement(By.xpath(String.format(priceLocator, productName))).getText();
     }
 
     public String getQuantityForProduct(String productName) {
         return driver.findElement(By.xpath(String.format(quantityLocator, productName))).getText();
     }
-
 
     public void clickCheckout() {
         driver.findElement(CHECKOUT_BUTTON).click();

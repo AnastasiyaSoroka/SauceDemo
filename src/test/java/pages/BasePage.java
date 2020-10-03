@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 abstract class BasePage {
 
     WebDriver driver;
+
     public static final String URL = "https://www.saucedemo.com/";
 
     public BasePage(WebDriver driver) {
@@ -14,4 +15,5 @@ abstract class BasePage {
     public String getCurrentURL() {
         return driver.getCurrentUrl();
     }
+
 }

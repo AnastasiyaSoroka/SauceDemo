@@ -7,7 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.*;
 
-public class Settings {
+public class BaseTest {
 
     WebDriver driver;
     LoginPage loginPage;
