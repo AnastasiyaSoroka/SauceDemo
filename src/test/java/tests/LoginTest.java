@@ -8,6 +8,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void checkErrorWithUsernameEmpty() {
         loginPage.openPage();
+        loginPage.isPageOpened();
         loginPage.clickLogin();
         Assert.assertEquals(loginPage.getErrorText(), "Epic sadface: Username is required", "Incorrect error appears");
     }

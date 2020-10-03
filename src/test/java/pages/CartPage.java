@@ -1,7 +1,10 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 public class CartPage extends BasePage {
 
@@ -13,10 +16,18 @@ public class CartPage extends BasePage {
             "//div[@class='cart_quantity']";
 
     private final By CHECKOUT_BUTTON = By.cssSelector(".checkout_button");
-    private final By CONTINUE_BUTTON = By.className("btn_secondary");
+    private final By CONTINUE_BUTTON = By.xpath("//*[contains(@class,'checkout_button')]/../*[contains(text(),'Continue Shopping')]");
 
     public CartPage(WebDriver driver) {
         super(driver);
+    }
+
+    public void isPageOpened() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(CONTINUE_BUTTON ));
+        } catch (TimeoutException ex) {
+            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + CONTINUE_BUTTON );
+        }
     }
 
     public void openPage() {
