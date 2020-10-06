@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CheckoutPage extends BasePage {
 
@@ -15,12 +16,21 @@ public class CheckoutPage extends BasePage {
         super(driver);
     }
 
+    public void isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(CONTINUE_BUTTON));
+    }
+
     public void clickContinue() {
         driver.findElement(CONTINUE_BUTTON).click();
     }
 
     public String getErrorText() {
+        isErrorAppears();
         return driver.findElement(ERROR).getText();
+    }
+
+    public void isErrorAppears() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR));
     }
 
     public void sendKeysToFirstName(String firstName) {
