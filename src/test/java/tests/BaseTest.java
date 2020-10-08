@@ -16,6 +16,8 @@ public class BaseTest {
     CheckoutPage checkoutPage;
     CheckOutOverviewPage checkOutOverviewPage;
     InventoryItemPage inventoryItemPage;
+    FinishPage finishPage;
+    MenuPage menuPage;
 
     LoginPageFactory loginPageFactory;
 
@@ -36,6 +38,8 @@ public class BaseTest {
         checkoutPage = new CheckoutPage(driver);
         checkOutOverviewPage = new CheckOutOverviewPage(driver);
         inventoryItemPage = new InventoryItemPage(driver);
+        finishPage = new FinishPage(driver);
+        menuPage = new MenuPage(driver);
         loginPageFactory = new LoginPageFactory(driver);
     }
 
