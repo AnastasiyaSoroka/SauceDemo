@@ -16,12 +16,18 @@ public class CheckoutPage extends BasePage {
         super(driver);
     }
 
-    public void isPageOpened() {
+    public CheckoutPage isPageOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(CONTINUE_BUTTON));
+        return this;
     }
 
-    public void clickContinue() {
+    public CheckoutPage openPage() {
+        return this;
+    }
+
+    public CheckoutPage clickContinue() {
         driver.findElement(CONTINUE_BUTTON).click();
+        return this;
     }
 
     public String getErrorText() {
@@ -33,16 +39,19 @@ public class CheckoutPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR));
     }
 
-    public void sendKeysToFirstName(String firstName) {
+    public CheckoutPage sendKeysToFirstName(String firstName) {
         driver.findElement(FIRST_NAME).sendKeys(firstName);
+        return this;
     }
 
-    public void sendKeysToLastName(String lastName) {
+    public CheckoutPage sendKeysToLastName(String lastName) {
         driver.findElement(LAST_NAME).sendKeys(lastName);
+        return this;
     }
 
-    public void sendKeysToZipCode(String zipCode) {
+    public CheckoutPage sendKeysToZipCode(String zipCode) {
         driver.findElement(ZIP_CODE).sendKeys(zipCode);
+        return this;
     }
 
 }

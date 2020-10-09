@@ -17,18 +17,27 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void isPageOpened() {
+    public LoginPage isPageOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+        return this;
     }
 
-    public void login(String username, String password) {
+    public LoginPage attemptLogin(String username, String password) {
         driver.findElement(USERNAME_INPUT).sendKeys(username);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
+        return this;
     }
 
-    public void openPage() {
+    public ProductPage login(String username, String password) {
+        attemptLogin(username, password);
+        return new ProductPage(driver);
+    }
+
+
+    public LoginPage openPage() {
         driver.get(URL + endpoint);
+        return this;
     }
 
     public String getErrorText() {

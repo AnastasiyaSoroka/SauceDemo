@@ -9,14 +9,21 @@ import pages.*;
 
 public class BaseTest {
 
-    WebDriver driver;
+    private WebDriver driver;
     LoginPage loginPage;
     ProductPage productPage;
     CartPage cartPage;
     CheckoutPage checkoutPage;
     CheckOutOverviewPage checkOutOverviewPage;
-    public static final String username = "standard_user";
-    public static final String password = "secret_sauce";
+    InventoryItemPage inventoryItemPage;
+    FinishPage finishPage;
+    MenuPage menuPage;
+
+    LoginPageFactory loginPageFactory;
+
+
+    public static final String USERNAME = "standard_user";
+    public static final String PASSWORD = "secret_sauce";
 
     @BeforeMethod
     public void setup() {
@@ -30,6 +37,10 @@ public class BaseTest {
         cartPage = new CartPage(driver);
         checkoutPage = new CheckoutPage(driver);
         checkOutOverviewPage = new CheckOutOverviewPage(driver);
+        inventoryItemPage = new InventoryItemPage(driver);
+        finishPage = new FinishPage(driver);
+        menuPage = new MenuPage(driver);
+        loginPageFactory = new LoginPageFactory(driver);
     }
 
     @AfterMethod
