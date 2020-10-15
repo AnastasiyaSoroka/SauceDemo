@@ -22,11 +22,12 @@ public class BaseTest {
     LoginPageFactory loginPageFactory;
 
 
-    public static final String USERNAME = "standard_user";
-    public static final String PASSWORD = "secret_sauce";
+    public static final String USERNAME = System.getProperty("username");//"standard_user";
+    public static final String PASSWORD = System.getProperty("password");//"secret_sauce";
 
     @BeforeMethod
     public void setup() {
+
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(false);

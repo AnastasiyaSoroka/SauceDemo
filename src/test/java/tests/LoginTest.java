@@ -22,7 +22,7 @@ public class LoginTest extends BaseTest {
 
         String errorText = loginPage
                 .openPage()
-                .attemptLogin("", "dfgdfgdfgdf")
+                .attemptLogin("dfgdfgdfgdfg", "")
                 .getErrorText();
 
         assertEquals(errorText, "Epic sadface: Password is required", "Incorrect error appears");
@@ -36,14 +36,7 @@ public class LoginTest extends BaseTest {
                 .attemptLogin("", "dfgdfgdfgdf")
                 .getErrorText();
 
-        assertEquals(errorText, "Epic sadface: Username and password do not match any user in this service", "Incorrect error appears");
-    }
-
-    @Test
-    public void checkLoginPageByFactory() {
-        loginPageFactory
-                .openPage()
-                .login(USERNAME, PASSWORD);
+        assertEquals(errorText, "Epic sadface: Username is required", "Incorrect error appears");
     }
 
 }
