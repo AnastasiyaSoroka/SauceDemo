@@ -26,8 +26,8 @@ public class CheckoutTest extends BaseTest {
                 .isPageOpened()
                 .isElementDisplayed(PRODUCT_LABEL);
 
-        assertTrue(isProductPageOpened,"Page is not opened");
-     }
+        assertTrue(isProductPageOpened, "Page is not opened");
+    }
 
     @Test
     public void checkErrorWithFirstNameEmpty() {
@@ -45,7 +45,6 @@ public class CheckoutTest extends BaseTest {
                 .clickCheckout();
 
         String actualErrorMessage = checkoutPage
-                .sendKeysToFirstName("blablabla")
                 .clickContinue()
                 .getErrorText();
 
