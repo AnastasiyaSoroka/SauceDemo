@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import org.testng.annotations.Test;
 
@@ -14,12 +14,12 @@ public class CartTest extends BaseTest {
     private String firstProductPrice = "49.99";
     private String secondProductPrice = "9.99";
 
-    @Test
+    @Test(description = "Check that Product can be added into the Cart")
     public void productShouldBeAddedIntoCart() {
         loginPage
                 .openPage()
                 .isPageOpened()
-                .login(USERNAME, PASSWORD);
+                .attemptLogin(USERNAME, PASSWORD);
 
         productPage
                 .isPageOpened()
@@ -38,12 +38,12 @@ public class CartTest extends BaseTest {
         assertEquals(actualQuantity, quantity, "Quantity is not correct");
     }
 
-    @Test
+    @Test(description = "Check that Product can be removed from the Cart")
     public void productCouldBeRemovedFromCart() {
         loginPage
                 .openPage()
                 .isPageOpened()
-                .login(USERNAME, PASSWORD);
+                .attemptLogin(USERNAME, PASSWORD);
 
         productPage
                 .isPageOpened()
@@ -57,12 +57,12 @@ public class CartTest extends BaseTest {
         assertFalse(isRemovedDisplayed, "Remove button is on the page");
     }
 
-    @Test
+    @Test(description = "Check that two Products can be added Into the Cart")
     public void twoProductsShouldBeAddedIntoCart() {
         loginPage
                 .openPage()
                 .isPageOpened()
-                .login(USERNAME, PASSWORD);
+                .attemptLogin(USERNAME, PASSWORD);
 
         productPage
                 .isPageOpened()
@@ -93,12 +93,12 @@ public class CartTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(description = "Check that Product can be removed from the Cart, check that the Cart is empty")
     public void productRemovedFromItemPageNotInCart() {
         loginPage
                 .openPage()
                 .isPageOpened()
-                .login(USERNAME, PASSWORD);
+                .attemptLogin(USERNAME, PASSWORD);
 
         productPage
                 .isPageOpened()

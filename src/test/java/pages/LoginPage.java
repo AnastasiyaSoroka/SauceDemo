@@ -1,8 +1,10 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.AllureUtils;
 
 public class LoginPage extends BasePage {
 
@@ -17,11 +19,14 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Step("Login page was opened")
     public LoginPage isPageOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+        AllureUtils.takeScreenshot(driver);
         return this;
     }
 
+    @Step("Trying to log in with the following parameters:")
     public LoginPage attemptLogin(String username, String password) {
         driver.findElement(USERNAME_INPUT).sendKeys(username);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
@@ -29,19 +34,15 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public ProductPage login(String username, String password) {
-        attemptLogin(username, password);
-        return new ProductPage(driver);
-    }
-
-
     public LoginPage openPage() {
         driver.get(URL + endpoint);
         return this;
     }
 
+    @Step("Error appears")
     public String getErrorText() {
         isErrorAppears();
+        AllureUtils.takeScreenshot(driver);
         return driver.findElement(ERROR).getText();
     }
 
@@ -49,7 +50,4 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR));
     }
 
-    public void clickLogin() {
-        driver.findElement(LOGIN_BUTTON).click();
-    }
 }
