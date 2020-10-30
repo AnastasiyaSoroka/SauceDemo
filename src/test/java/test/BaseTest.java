@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.*;
 import utils.CapabilitiesGenerator;
+import utils.PropertyReader;
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -24,8 +25,8 @@ public class BaseTest {
     MenuPage menuPage;
     LoginPageFactory loginPageFactory;
 
-    public static final String USERNAME = System.getenv("username");
-    public static final String PASSWORD = System.getenv("password");
+    public static final String USERNAME = System.getenv().getOrDefault("username",PropertyReader.getProperty("username"));
+    public static final String PASSWORD = System.getenv().getOrDefault("password",PropertyReader.getProperty("password"));
 
     @BeforeMethod(description = "Opening Chrome Driver")
     public void setup(ITestContext context) {
