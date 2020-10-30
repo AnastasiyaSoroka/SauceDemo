@@ -8,6 +8,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.*;
+import utils.CapabilitiesGenerator;
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -21,9 +22,7 @@ public class BaseTest {
     InventoryItemPage inventoryItemPage;
     FinishPage finishPage;
     MenuPage menuPage;
-
     LoginPageFactory loginPageFactory;
-
 
     public static final String USERNAME = "standard_user";//System.getProperty("username");//"standard_user";
     public static final String PASSWORD = "secret_sauce";//System.getProperty("password");//"secret_sauce";
@@ -35,7 +34,7 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(false);
         String variable = "driver";
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         loginPage = new LoginPage(driver);
         productPage = new ProductPage(driver);
