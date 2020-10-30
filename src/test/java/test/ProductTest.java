@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import org.testng.annotations.Test;
 
@@ -8,13 +8,13 @@ public class ProductTest extends BaseTest {
 
     private String productName = "Sauce Labs Fleece Jacket";
 
-    @Test
+    @Test(description = "Check if User clicks Add to Cart button, the Name of the button was changed to Remove")
     public void checkTextButtonChangedFromAddToRemove() {
 
         loginPage
                 .openPage()
                 .isPageOpened()
-                .login(USERNAME, PASSWORD);
+                .attemptLogin(USERNAME, PASSWORD);
 
         String nameButton = productPage
                 .isPageOpened()
@@ -24,13 +24,13 @@ public class ProductTest extends BaseTest {
         assertEquals(nameButton, "REMOVE", "Button wasn't clicked");
     }
 
-    @Test
+    @Test(description = "Check if User clicks Remove from Cart button, the Name of the button was changed to Add")
     public void checkTextButtonChangedFromRemoveToAdd() {
 
         loginPage
                 .openPage()
                 .isPageOpened()
-                .login(USERNAME, PASSWORD);
+                .attemptLogin(USERNAME, PASSWORD);
 
         String nameButton = productPage
                 .isPageOpened()

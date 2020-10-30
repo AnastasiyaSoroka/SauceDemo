@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import org.testng.annotations.Test;
 
@@ -10,13 +10,13 @@ public class CheckoutOverviewTest extends BaseTest {
     private String secondProductName = "Sauce Labs Bolt T-Shirt";
     private String firstProductPrice = "49.99";
 
-    @Test
+    @Test(description = "Check Total Price for two product on the Checkout Overview page")
     public void checkItemTotalTwoProducts() {
 
         loginPage
                 .openPage()
                 .isPageOpened()
-                .login(USERNAME, PASSWORD);
+                .attemptLogin(USERNAME, PASSWORD);
         productPage
                 .isPageOpened()
                 .addToCart(firstProductName)
@@ -44,13 +44,13 @@ public class CheckoutOverviewTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(description = "Check Total Price for a product on the Checkout Overview page")
     public void checkItemTotalOneProduct() {
 
         loginPage
                 .openPage()
                 .isPageOpened()
-                .login(USERNAME, PASSWORD);
+                .attemptLogin(USERNAME, PASSWORD);
         productPage
                 .isPageOpened()
                 .addToCart(firstProductName);

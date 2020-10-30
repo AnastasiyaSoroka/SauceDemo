@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import org.testng.annotations.Test;
 
@@ -9,12 +9,12 @@ public class InventoryItemTest extends BaseTest {
     private String productName = "Sauce Labs Fleece Jacket";
     private String productPrice = "$49.99";
 
-    @Test
+    @Test(description = "Check that Price and Product Name are correct on the Inventory Item Page")
     public void productShouldBeCorrectOnItemPage() {
         loginPage
                 .openPage()
                 .isPageOpened()
-                .login(USERNAME, PASSWORD);
+                .attemptLogin(USERNAME, PASSWORD);
 
         productPage
                 .isPageOpened()
@@ -33,8 +33,8 @@ public class InventoryItemTest extends BaseTest {
         String actualPrice = inventoryItemPage
                 .getPriceForProduct();
 
-        assertEquals(actualName,productName,"Incorrect items's name is displayed");
-        assertEquals(actualPrice,productPrice,"Incorrect items's price is displayed");
+        assertEquals(actualName, productName, "Incorrect items's name is displayed");
+        assertEquals(actualPrice, productPrice, "Incorrect items's price is displayed");
 
     }
 

@@ -1,10 +1,12 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import utils.AllureUtils;
 
 public class ProductPage extends BasePage {
 
@@ -15,17 +17,20 @@ public class ProductPage extends BasePage {
         super(driver);
     }
 
+    @Step("User is adding a product into the Cart")
     public ProductPage addToCart(String productName) {
         driver.findElement(By.xpath(String.format(addToCartLocator, productName))).click();
         return this;
     }
 
+    @Step("Product page was opened")
     public ProductPage isPageOpened() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCT_LABEL));
         } catch (TimeoutException ex) {
             Assert.fail("Страница не загрузилась. Не найден product label по локатору " + PRODUCT_LABEL);
         }
+        AllureUtils.takeScreenshot(driver);
         return this;
     }
 

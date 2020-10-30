@@ -1,11 +1,13 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import utils.AllureUtils;
 
 import java.util.List;
 
@@ -18,12 +20,14 @@ public class CheckOutOverviewPage extends BasePage {
     private final By SUMMARY_ITEM = By.className("summary_subtotal_label");
     private final By PRICE_ITEM = By.className("inventory_item_price");
 
+    @Step("Checkout page was opened")
     public CheckOutOverviewPage isPageOpened() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(SUMMARY_ITEM));
         } catch (TimeoutException ex) {
             Assert.fail("Страница не загрузилась. Не найдена сумма " + SUMMARY_ITEM);
         }
+        AllureUtils.takeScreenshot(driver);
         return this;
     }
 
