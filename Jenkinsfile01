@@ -6,18 +6,18 @@ pipeline {
       maven "M3"
    }
     triggers {
-        cron('0 11 * * *')
+        cron('0 8 * * *')
     }
     parameters {
         gitParameter  branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
-       // string defaultValue: "TEST", description: 'What environment?', name: 'userFlag'
+        string defaultValue: "TEST", description: 'What environment?', name: 'userFlag'
 
     }
    stages {
       stage('Running tests') {
          steps {
             // Get some code from a GitHub repository
-           // git branch: "${params.BRANCH}", url: 'https://github.com/AnastasiyaSoroka/SauceDemo.git'
+            git branch: "${params.BRANCH}", url: 'https://github.com/AnastasiyaSoroka/SauceDemo.git'
 
             // Run Maven on a Unix agent.
             //sh "mvn clean test -Dmaven.test.failure.ignore=true"
