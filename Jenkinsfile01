@@ -9,9 +9,9 @@ pipeline {
         cron('0 8 * * *')
     }
     parameters {
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
-        string name: 'username'
-        string name: 'password'
+        gitParameter ( branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'),
+        string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
+
     }
    stages {
       stage('Running tests') {
