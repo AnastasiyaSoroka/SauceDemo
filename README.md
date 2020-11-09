@@ -23,3 +23,4 @@ Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
 4. mvn clean test  -Dpassword=secret_sauce -Dusername=standard_user
 Tests run: 17, Failures: 0, Errors: 0, Skipped: 0
 
+mvn clean test -Dtest=CartTest#productShouldBeAddedIntoCart -Dpassword=secret_sauce -Dusername=standard_user
