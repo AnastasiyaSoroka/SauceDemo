@@ -10,6 +10,8 @@ pipeline {
     }
     parameters {
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
+        string name: 'username'
+        string name: 'password'
     }
    stages {
       stage('Running tests') {
