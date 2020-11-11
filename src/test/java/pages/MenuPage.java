@@ -21,10 +21,9 @@ public class MenuPage extends BasePage {
     @Step("Menu was opened")
     public MenuPage isPageOpened() {
         try {
-            log.info("Opening Menu Page. Waiting till element appears by locator " + CLOSE_BUTTON);
             wait.until(ExpectedConditions.visibilityOfElementLocated(CLOSE_BUTTON));
         } catch (TimeoutException ex) {
-            log.fatal("Menu Page is not opened. The button is not founded by locator " + CLOSE_BUTTON);
+            log.fatal("Menu Page is not opened. Failed with " + ex.getMessage());
         }
         AllureUtils.takeScreenshot(driver);
         return this;

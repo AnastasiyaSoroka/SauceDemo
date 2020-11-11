@@ -17,10 +17,9 @@ public class FinishPage extends BasePage {
     @Step("Finish page was opened")
     public FinishPage isPageOpened() {
         try {
-            log.info("Opening Finish Page. Waiting till element appears by locator " + FINISH_LABEL);
             wait.until(ExpectedConditions.visibilityOfElementLocated(FINISH_LABEL));
         } catch (TimeoutException ex) {
-            log.fatal("Cart Page is not opened. The button is not founded by locator " + FINISH_LABEL);
+            log.fatal("Finish Page is not opened. Failed with " + ex.getMessage());
         }
         AllureUtils.takeScreenshot(driver);
         return this;

@@ -24,10 +24,9 @@ public class CheckoutPage extends BasePage {
     @Step("Checkout page was opened")
     public CheckoutPage isPageOpened() {
         try {
-            log.info("Opening Checkout Page. Waiting till element appears by locator " + CONTINUE_BUTTON);
             wait.until(ExpectedConditions.visibilityOfElementLocated(CONTINUE_BUTTON));
         } catch (TimeoutException ex) {
-            log.fatal("Checkout Page is not opened. The button is not founded by locator " + CONTINUE_BUTTON);
+            log.fatal("Checkout Page is not opened. Failed with " + ex.getMessage());
         }
         AllureUtils.takeScreenshot(driver);
         return this;
@@ -39,7 +38,6 @@ public class CheckoutPage extends BasePage {
 
     @Step("User is clicking on Continue button")
     public CheckoutPage clickContinue() {
-        log.info("User is clicking on Continue button by locator: " + CONTINUE_BUTTON);
         driver.findElement(CONTINUE_BUTTON).click();
         return this;
     }
@@ -53,27 +51,26 @@ public class CheckoutPage extends BasePage {
     }
 
     public void isErrorAppears() {
-        log.info("User is waiting till error appears by locator: " + ERROR);
         wait.until(ExpectedConditions.visibilityOfElementLocated(ERROR));
     }
 
     @Step("User populates First Name with the following value:")
     public CheckoutPage sendKeysToFirstName(String firstName) {
-        log.info("User is updating First Name with " + firstName + " by locator: " + FIRST_NAME);
+        log.info("User is updating First Name with " + firstName);
         driver.findElement(FIRST_NAME).sendKeys(firstName);
         return this;
     }
 
     @Step("User populates LastName Code with the following value:")
     public CheckoutPage sendKeysToLastName(String lastName) {
-        log.info("User is updating Last Name with " + lastName + " by locator: " + LAST_NAME);
+        log.info("User is updating Last Name with " + lastName);
         driver.findElement(LAST_NAME).sendKeys(lastName);
         return this;
     }
 
     @Step("User populates ZIP Code with the following value:")
     public CheckoutPage sendKeysToZipCode(String zipCode) {
-        log.info("User is updating ZIP Code with " + zipCode + " by locator: " + ZIP_CODE);
+        log.info("User is updating ZIP Code with " + zipCode);
         driver.findElement(ZIP_CODE).sendKeys(zipCode);
         return this;
     }

@@ -24,10 +24,9 @@ public class InventoryItemPage extends BasePage {
     @Step("Inventory Item page was opened")
     public InventoryItemPage isPageOpened() {
         try {
-            log.info("Opening InventoryItem Page. Waiting till element appears by locator " + REMOVE_BUTTON);
             wait.until(ExpectedConditions.visibilityOfElementLocated(REMOVE_BUTTON));
         } catch (TimeoutException ex) {
-            log.fatal("InventoryItem Page is not opened. The button is not founded by locator " + REMOVE_BUTTON);
+            log.fatal("InventoryItem Page is not opened. Failed with " + ex.getMessage());
         }
         AllureUtils.takeScreenshot(driver);
         return this;
@@ -47,7 +46,6 @@ public class InventoryItemPage extends BasePage {
 
     @Step("User clicks on Remove selected product from the Cart")
     public InventoryItemPage clickRemoveItemFromCart() {
-        log.info("User is clicking on Remove selected product from the Cart by locator: " + REMOVE_BUTTON);
         driver.findElement(REMOVE_BUTTON).click();
         AllureUtils.takeScreenshot(driver);
         return this;

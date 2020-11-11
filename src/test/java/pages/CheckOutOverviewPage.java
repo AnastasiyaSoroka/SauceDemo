@@ -25,10 +25,9 @@ public class CheckOutOverviewPage extends BasePage {
     @Step("Checkout page was opened")
     public CheckOutOverviewPage isPageOpened() {
         try {
-            log.info("Opening CheckOutOverview Page. Waiting till element appears by locator " + SUMMARY_ITEM);
             wait.until(ExpectedConditions.visibilityOfElementLocated(SUMMARY_ITEM));
         } catch (TimeoutException ex) {
-            log.fatal("CheckOutOverview Page is not opened. The button is not founded by locator " + SUMMARY_ITEM);
+            log.fatal("CheckOutOverview Page is not opened. Failed with " + ex.getMessage());
         }
         AllureUtils.takeScreenshot(driver);
         return this;
@@ -52,6 +51,7 @@ public class CheckOutOverviewPage extends BasePage {
 
         for (WebElement element : items) {
             summary += Double.valueOf(element.getText().substring(1));
+            log.debug("Counting the final price "+summary);
         }
         String sum = String.valueOf(summary);
         return sum;

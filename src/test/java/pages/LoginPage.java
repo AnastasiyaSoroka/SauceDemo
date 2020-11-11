@@ -25,10 +25,10 @@ public class LoginPage extends BasePage {
     @Step("Login page was opened")
     public LoginPage isPageOpened() {
         try {
-            log.info("Opening Login Page. Waiting till element appears by locator " + LOGIN_BUTTON);
+           // log.info("Opening Login Page. Waiting till element appears by locator " + LOGIN_BUTTON);
             wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
         } catch (TimeoutException ex) {
-            log.fatal("Login Page is not opened. The button is not founded by locator " + LOGIN_BUTTON);
+            log.fatal("Login Page is not opened. Failed with " + ex.getMessage());
         }
         AllureUtils.takeScreenshot(driver);
         return this;
@@ -36,9 +36,9 @@ public class LoginPage extends BasePage {
 
     @Step("Trying to log in with the following parameters:")
     public LoginPage attemptLogin(String username, String password) {
-        log.info("Populating Username by locator: " + USERNAME_INPUT);
+        log.info("Populating Username with: " + username);
         driver.findElement(USERNAME_INPUT).sendKeys(username);
-        log.info("Populating Password by locator: " + PASSWORD_INPUT);
+        log.info("Populating Password with: " + password);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         log.info("Clicking on Login button" );
         driver.findElement(LOGIN_BUTTON).click();
@@ -55,6 +55,7 @@ public class LoginPage extends BasePage {
     public String getErrorText() {
         isErrorAppears();
         AllureUtils.takeScreenshot(driver);
+        log.info("The following error appears: " + driver.findElement(ERROR).getText());
         return driver.findElement(ERROR).getText();
     }
 

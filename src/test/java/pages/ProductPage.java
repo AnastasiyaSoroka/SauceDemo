@@ -20,7 +20,7 @@ public class ProductPage extends BasePage {
 
     @Step("User is adding a product into the Cart")
     public ProductPage addToCart(String productName) {
-        log.info("User is adding a product into the Cart by locator: " + By.xpath(String.format(addToCartLocator, productName)));
+        log.info(String.format("User is adding a %s into the Cart", productName));
         driver.findElement(By.xpath(String.format(addToCartLocator, productName))).click();
         return this;
     }
@@ -28,10 +28,9 @@ public class ProductPage extends BasePage {
     @Step("Product page was opened")
     public ProductPage isPageOpened() {
         try {
-            log.info("Opening Product Page. Waiting till element appears by locator " + PRODUCT_LABEL);
             wait.until(ExpectedConditions.visibilityOfElementLocated(PRODUCT_LABEL));
         } catch (TimeoutException ex) {
-            log.fatal("Product Page is not opened. The button is not founded by locator " + PRODUCT_LABEL);
+            log.fatal("Product Page is not opened. Failed with " + ex.getMessage());
         }
         AllureUtils.takeScreenshot(driver);
         return this;
