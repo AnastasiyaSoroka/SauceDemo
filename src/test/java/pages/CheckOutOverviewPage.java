@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,7 @@ import utils.AllureUtils;
 
 import java.util.List;
 
+@Log4j2
 public class CheckOutOverviewPage extends BasePage {
 
     public CheckOutOverviewPage(WebDriver driver) {
@@ -25,7 +27,7 @@ public class CheckOutOverviewPage extends BasePage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(SUMMARY_ITEM));
         } catch (TimeoutException ex) {
-            Assert.fail("Страница не загрузилась. Не найдена сумма " + SUMMARY_ITEM);
+            log.fatal("CheckOutOverview Page is not opened. Failed with " + ex.getMessage());
         }
         AllureUtils.takeScreenshot(driver);
         return this;
@@ -49,6 +51,7 @@ public class CheckOutOverviewPage extends BasePage {
 
         for (WebElement element : items) {
             summary += Double.valueOf(element.getText().substring(1));
+            log.debug("Counting the final price "+summary);
         }
         String sum = String.valueOf(summary);
         return sum;

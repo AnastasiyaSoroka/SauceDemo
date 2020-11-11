@@ -1,6 +1,11 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import utils.AllureUtils;
 
+@Log4j2
 public class CartPage extends BasePage {
 
     private String endpoint = "cart.html";
@@ -32,7 +38,7 @@ public class CartPage extends BasePage {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(CONTINUE_BUTTON));
         } catch (TimeoutException ex) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + CONTINUE_BUTTON);
+            log.fatal("Cart Page is not opened. Failed with " + ex.getMessage());
         }
         AllureUtils.takeScreenshot(driver);
         return this;
@@ -45,14 +51,17 @@ public class CartPage extends BasePage {
 
     @Step("User clicks on Item Name button")
     public void clickOnItemNameLocator(String productName) {
+        log.info(String.format("User is clicking on item %s button", productName));
         driver.findElement(By.xpath(String.format(itemNameLocator, productName))).click();
     }
 
     public String getPriceForProduct(String productName) {
+        log.info(String.format("User is checking price for %s product", productName));
         return driver.findElement(By.xpath(String.format(priceLocator, productName))).getText();
     }
 
     public String getQuantityForProduct(String productName) {
+        log.info(String.format("User is checking quantity for %s product", productName));
         return driver.findElement(By.xpath(String.format(quantityLocator, productName))).getText();
     }
 

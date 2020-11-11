@@ -1,5 +1,6 @@
 package test;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,6 +12,7 @@ import pages.*;
 import utils.CapabilitiesGenerator;
 import utils.PropertyReader;
 
+@Log4j2
 @Listeners(TestListener.class)
 public class BaseTest {
 
@@ -39,7 +41,13 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(false);
         String variable = "driver";
-        driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
+
+        try {
+            driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
+        } catch (IllegalStateException ex) {
+            log.fatal(ex.getLocalizedMessage());
+        }
+
         driver.manage().window().maximize();
         loginPage = new LoginPage(driver);
         productPage = new ProductPage(driver);
@@ -50,7 +58,7 @@ public class BaseTest {
         finishPage = new FinishPage(driver);
         menuPage = new MenuPage(driver);
         loginPageFactory = new LoginPageFactory(driver);
-        System.out.println("Setting driver into context with variable name " + variable);
+        log.info("Setting driver into context with variable name " + variable);
         context.setAttribute(variable, driver);
     }
 
