@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,7 @@ import utils.AllureUtils;
 
 import java.util.List;
 
+@Log4j2
 public class CheckOutOverviewPage extends BasePage {
 
     public CheckOutOverviewPage(WebDriver driver) {
@@ -23,9 +25,10 @@ public class CheckOutOverviewPage extends BasePage {
     @Step("Checkout page was opened")
     public CheckOutOverviewPage isPageOpened() {
         try {
+            log.info("Opening CheckOutOverview Page. Waiting till element appears by locator " + SUMMARY_ITEM);
             wait.until(ExpectedConditions.visibilityOfElementLocated(SUMMARY_ITEM));
         } catch (TimeoutException ex) {
-            Assert.fail("Страница не загрузилась. Не найдена сумма " + SUMMARY_ITEM);
+            log.fatal("CheckOutOverview Page is not opened. The button is not founded by locator " + SUMMARY_ITEM);
         }
         AllureUtils.takeScreenshot(driver);
         return this;

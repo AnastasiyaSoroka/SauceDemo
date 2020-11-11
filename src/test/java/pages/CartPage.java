@@ -1,6 +1,11 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import utils.AllureUtils;
 
+@Log4j2
 public class CartPage extends BasePage {
 
     private String endpoint = "cart.html";
@@ -30,21 +36,24 @@ public class CartPage extends BasePage {
     @Step("Cart page was opened")
     public CartPage isPageOpened() {
         try {
+            log.info("Opening Cart Page. Waiting till element appears by locator " + CONTINUE_BUTTON);
             wait.until(ExpectedConditions.visibilityOfElementLocated(CONTINUE_BUTTON));
         } catch (TimeoutException ex) {
-            Assert.fail("Страница не загрузилась. Не найдена кнопка по локатору " + CONTINUE_BUTTON);
+            log.fatal("Cart Page is not opened. The button is not founded by locator " + CONTINUE_BUTTON);
         }
         AllureUtils.takeScreenshot(driver);
         return this;
     }
 
     public CartPage openPage() {
+        log.info("Cart page URL is " + URL + endpoint);
         driver.get(URL + endpoint);
         return this;
     }
 
     @Step("User clicks on Item Name button")
     public void clickOnItemNameLocator(String productName) {
+        log.info("User is clicking on Item Name button by locator: " + By.xpath(String.format(itemNameLocator, productName)));
         driver.findElement(By.xpath(String.format(itemNameLocator, productName))).click();
     }
 
@@ -58,16 +67,19 @@ public class CartPage extends BasePage {
 
     @Step("User clicks on Checkout button")
     public void clickCheckout() {
+        log.info("User is clicking on Checkout button by locator: " + CHECKOUT_BUTTON);
         driver.findElement(CHECKOUT_BUTTON).click();
     }
 
     @Step("User clicks on Continue Shopping button")
     public void clickContinueShopping() {
+        log.info("User is clicking on Continue Shopping button by locator: " + CONTINUE_BUTTON);
         driver.findElement(CONTINUE_BUTTON).click();
     }
 
     @Step("User clicks on Remove selected product from the Cart")
     public CartPage clickRemoveItemFromCart() {
+        log.info("User is clicking on Remove selected product from the Cart by locator: " + REMOVE_BUTTON);
         driver.findElement(REMOVE_BUTTON).click();
         AllureUtils.takeScreenshot(driver);
         return this;

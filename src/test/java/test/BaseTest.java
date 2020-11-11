@@ -1,5 +1,6 @@
 package test;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,6 +12,7 @@ import pages.*;
 import utils.CapabilitiesGenerator;
 import utils.PropertyReader;
 
+@Log4j2
 @Listeners(TestListener.class)
 public class BaseTest {
 
@@ -34,24 +36,27 @@ public class BaseTest {
 
     @BeforeMethod(description = "Opening Chrome Driver")
     public void setup(ITestContext context) {
-
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.setHeadless(false);
-        String variable = "driver";
-        driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
-        driver.manage().window().maximize();
-        loginPage = new LoginPage(driver);
-        productPage = new ProductPage(driver);
-        cartPage = new CartPage(driver);
-        checkoutPage = new CheckoutPage(driver);
-        checkOutOverviewPage = new CheckOutOverviewPage(driver);
-        inventoryItemPage = new InventoryItemPage(driver);
-        finishPage = new FinishPage(driver);
-        menuPage = new MenuPage(driver);
-        loginPageFactory = new LoginPageFactory(driver);
-        System.out.println("Setting driver into context with variable name " + variable);
-        context.setAttribute(variable, driver);
+        try {
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+            ChromeOptions options = new ChromeOptions();
+            options.setHeadless(false);
+            String variable = "driver";
+            driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
+            driver.manage().window().maximize();
+            loginPage = new LoginPage(driver);
+            productPage = new ProductPage(driver);
+            cartPage = new CartPage(driver);
+            checkoutPage = new CheckoutPage(driver);
+            checkOutOverviewPage = new CheckOutOverviewPage(driver);
+            inventoryItemPage = new InventoryItemPage(driver);
+            finishPage = new FinishPage(driver);
+            menuPage = new MenuPage(driver);
+            loginPageFactory = new LoginPageFactory(driver);
+            log.info("Setting driver into context with variable name "+ variable);
+            context.setAttribute(variable, driver);
+        } catch (Exception e) {
+            log.fatal("Initialization failed");
+        }
     }
 
     @AfterMethod
